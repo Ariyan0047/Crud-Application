@@ -1,7 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+body {
+  font-weight: 400;
+  letter-spacing: 1.6;
+  font-family: "Bangers", cursive;
 }
 /*# sourceMappingURL=style.css.map */
