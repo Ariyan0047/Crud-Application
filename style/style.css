@@ -6,9 +6,38 @@
           box-sizing: border-box;
 }
 
+.btn {
+  font-size: 1.5rem;
+  border-radius: 0;
+}
+
 body {
   font-weight: 400;
   letter-spacing: 1.6;
   font-family: "Bangers", cursive;
+}
+
+table thead tr th {
+  font-size: 1.5rem;
+}
+
+table tbody tr th {
+  font-size: 1.5rem;
+}
+
+table tbody tr td {
+  font-size: 1.5rem;
+}
+
+header.header-section {
+  width: 100%;
+  padding: 0.4rem;
+  background: #ddd;
+}
+
+footer.footer-section {
+  width: 100%;
+  padding: 0.4rem;
+  background: #ddd;
 }
 /*# sourceMappingURL=style.css.map */

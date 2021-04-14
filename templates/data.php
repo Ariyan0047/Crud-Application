@@ -23,8 +23,8 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <td><?php echo htmlspecialchars($product["prize"]); ?> tk</td>
                 <td><?php echo htmlspecialchars($product["created_at"]); ?></td>
                 <td>
-                    <button class="btn btn-warning">edit</button>
-                    <button class="btn btn-danger">delete</button>
+                    <button class="btn btn-warning btn-lg">edit</button>
+                    <button class="btn btn-danger btn-lg">delete</button>
                 </td>
             </tr>
             <?php endforeach; ?>
