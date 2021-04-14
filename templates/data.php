@@ -23,7 +23,7 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <td><?php echo htmlspecialchars($product["prize"]); ?> tk</td>
                 <td><?php echo htmlspecialchars($product["created_at"]); ?></td>
                 <td>
-                    <a href="./templates/insert.php?id=<?php echo $product[
+                    <a href="./templates/update.php?id=<?php echo $product[
                       "id"
                     ]; ?>" class="btn btn-warning btn-lg">edit</a>
                     <form action="./templates/delete.php" method="POST" style="display:inline-block;">

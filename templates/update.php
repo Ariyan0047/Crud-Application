@@ -4,6 +4,20 @@ include_once "../connection/connection.php";
 $title = $prize = "";
 $errors = [];
 
+// GETTING DATA FOR SPECIFIC USER
+$id = $_GET["id"] ?? null;
+
+if (!$id) {
+  header("Location: ../index.php");
+}
+
+if ($id) {
+  $statement = $conn->prepare("SELECT * FROM products WHERE id = :id");
+  $statement->bindValue(":id", $id);
+  $statement->execute();
+  $user = $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $title = $_POST["title"];
   $prize = $_POST["prize"];
@@ -20,8 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   if (empty($errors)) {
     $statement = $conn->prepare(
-      "INSERT INTO products (title,prize) VALUES (:title,:prize)"
+      "UPDATE products SET title = :title, prize = :prize WHERE id = :id"
     );
+    $statement->bindValue(":id", $id);
     $statement->bindValue(":title", $title);
     $statement->bindValue(":prize", $prize);
     $statement->execute();
@@ -57,26 +72,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php endif; ?>
 
     <!-- FORM SECTION -->
+    <?php foreach ($user as $item): ?>
     <div class="container mt-5 mb-5">
         <h1 class="display-4 text-center">insert product data</h1>
-        <form action="insert.php" method="POST">
+        <form action="" method="POST">
             <div class="form-group mt-2 mb-2">
                 <label for="title" class="col-form-label-lg">product title</label>
                 <input type="text" name="title" class="form-control form-control-lg" id="title"
                     placeholder="Enter product title" value="<?php echo htmlspecialchars(
-                      $title
+                      $item["title"]
                     ); ?>">
             </div>
             <div class="form-group mt-2 mb-2">
                 <label for="prize" class="col-form-label-lg">product prize</label>
                 <input type="number" name="prize" class="form-control form-control-lg" id="prize"
                     placeholder="Enter product prize" value="<?php echo htmlspecialchars(
-                      $prize
+                      $item["prize"]
                     ); ?>">
             </div>
             <button type="submit" name="submit" class="btn btn-primary btn-lg mt-2 w-100">Submit</button>
         </form>
     </div>
+    <?php endforeach; ?>
     <!-- END FORM SECTION -->
 
     <!-- SCRIPT TAGES -->
