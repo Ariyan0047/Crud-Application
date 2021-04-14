@@ -23,8 +23,15 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <td><?php echo htmlspecialchars($product["prize"]); ?> tk</td>
                 <td><?php echo htmlspecialchars($product["created_at"]); ?></td>
                 <td>
-                    <button class="btn btn-warning btn-lg">edit</button>
-                    <button class="btn btn-danger btn-lg">delete</button>
+                    <a href="./templates/insert.php?id=<?php echo $product[
+                      "id"
+                    ]; ?>" class="btn btn-warning btn-lg">edit</a>
+                    <form action="./templates/delete.php" method="POST" style="display:inline-block;">
+                        <input type="hidden" name="id" value="<?php echo $product[
+                          "id"
+                        ]; ?>">
+                        <button type="submit" class="btn btn-danger btn-lg">delete</button>
+                    </form>
                 </td>
             </tr>
             <?php endforeach; ?>

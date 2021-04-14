@@ -28,6 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     header("Location: ../index.php");
   }
 }
+
+// GETTING DATA FOR SPECIFIC USER
 ?>
 
 
@@ -63,12 +65,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group m-2">
                 <label for="title" class="col-form-label-lg">product title</label>
                 <input type="text" name="title" class="form-control form-control-lg" id="title"
-                    placeholder="Enter product title">
+                    placeholder="Enter product title" value="<?php echo htmlspecialchars(
+                      $title
+                    ); ?>">
             </div>
             <div class="form-group m-2">
                 <label for="prize" class="col-form-label-lg">product prize</label>
                 <input type="number" name="prize" class="form-control form-control-lg" id="prize"
-                    placeholder="Enter product prize">
+                    placeholder="Enter product prize" value="<?php echo htmlspecialchars(
+                      $prize
+                    ); ?>">
             </div>
             <button type="submit" name="submit" class="btn btn-primary btn-lg m-2 w-100">Submit</button>
         </form>
