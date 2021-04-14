@@ -2,21 +2,31 @@
 include_once "../connection/connection.php";
 
 $title = $prize = "";
+$errors = [];
 
-if (isset($_POST["submit"])) {
-  if (isset($_POST["title"])) {
-    $title = $_POST["title"];
-  }
-  if (isset($_POST["prize"])) {
-    $prize = $_POST["prize"];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  $title = $_POST["title"];
+  $prize = $_POST["prize"];
+
+  if (!$title) {
+    $err = "product title is empty";
+    array_push($errors, $err);
   }
 
-  $statement = $conn->prepare(
-    "INSERT INTO products (title,prize) VALUES (:title,:prize)"
-  );
-  $statement->bindValue(":title", $title);
-  $statement->bindValue(":prize", $prize);
-  $statement->execute();
+  if (!$prize) {
+    $err = "product prize is empty";
+    array_push($errors, $err);
+  }
+
+  if (empty($errors)) {
+    $statement = $conn->prepare(
+      "INSERT INTO products (title,prize) VALUES (:title,:prize)"
+    );
+    $statement->bindValue(":title", $title);
+    $statement->bindValue(":prize", $prize);
+    $statement->execute();
+    header("Location: ../index.php");
+  }
 }
 ?>
 
@@ -36,6 +46,16 @@ if (isset($_POST["submit"])) {
 
 <body>
 
+    <?php if (!empty($errors)): ?>
+    <div class="container alert alert-danger">
+        <?php foreach ($errors as $error): ?>
+        <h1>
+            <?php echo $error; ?>
+        </h1>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+
     <!-- FORM SECTION -->
     <div class="container mt-5 mb-5">
         <h1 class="display-4 text-center">insert product data</h1>
@@ -43,12 +63,12 @@ if (isset($_POST["submit"])) {
             <div class="form-group m-2">
                 <label for="title" class="col-form-label-lg">product title</label>
                 <input type="text" name="title" class="form-control form-control-lg" id="title"
-                    placeholder="Enter product title" required>
+                    placeholder="Enter product title">
             </div>
             <div class="form-group m-2">
                 <label for="prize" class="col-form-label-lg">product prize</label>
                 <input type="number" name="prize" class="form-control form-control-lg" id="prize"
-                    placeholder="Enter product prize" required>
+                    placeholder="Enter product prize">
             </div>
             <button type="submit" name="submit" class="btn btn-primary btn-lg m-2 w-100">Submit</button>
         </form>

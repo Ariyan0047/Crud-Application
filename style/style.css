@@ -29,6 +29,10 @@ table tbody tr td {
   font-size: 1.5rem;
 }
 
+div.tab {
+  height: 60vh;
+}
+
 header.header-section {
   width: 100%;
   padding: 0.4rem;

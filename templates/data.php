@@ -4,7 +4,7 @@ $statement->execute();
 $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<div class="container mt-5 mb-5">
+<div class="tab container mt-5 mb-2">
     <table class="table table-striped text-center">
         <thead>
             <tr>
