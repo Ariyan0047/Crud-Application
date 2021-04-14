@@ -15,13 +15,20 @@
 </head>
 
 <body>
-
     <!-- HEADER SECTION -->
     <?php include_once "./templates/header.php"; ?>
     <!-- END HEADER SECTION -->
 
     <div class="container">
         <a href="./templates/insert.php" class="btn btn-info btn-lg w-100 mt-4">create new product</a>
+        <form>
+            <div class="input-group mb-2 mt-2">
+                <input type="text" class="form-control" placeholder="Search product" name="search">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary">Search</button>
+                </div>
+            </div>
+        </form>
     </div>
 
     <!-- DISPLAYING DATA -->

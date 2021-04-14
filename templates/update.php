@@ -18,9 +18,13 @@ if ($id) {
   $user = $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $title = $_POST["title"];
-  $prize = $_POST["prize"];
+if (isset($_POST["submit"])) {
+  if (isset($_POST["title"])) {
+    $title = $_POST["title"];
+  }
+  if (isset($_POST["prize"])) {
+    $prize = $_POST["prize"];
+  }
 
   if (!$title) {
     $err = "product title is empty";

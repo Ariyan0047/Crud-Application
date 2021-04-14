@@ -1,7 +1,19 @@
 <?php
-$statement = $conn->prepare("SELECT * FROM products ORDER BY id");
+
+// include_once "../connection/connection.php";
+
+$search = $_GET["search"] ?? "";
+if ($search) {
+  $statement = $conn->prepare(
+    "SELECT * FROM products WHERE title LIKE :title ORDER BY id"
+  );
+  $statement->bindValue(":title", "%$search%");
+} else {
+  $statement = $conn->prepare("SELECT * FROM products ORDER BY id");
+}
 $statement->execute();
 $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+header("Location ../index.php");
 ?>
 
 <div class="tab container mt-5 mb-2">
